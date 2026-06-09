@@ -46,6 +46,15 @@ class compositon{
 		template <typename T> 
 		T add(T a , T b ){return a+b ;}
 };
+
+template <typename T , size_t S> 
+class buffer {
+	T m_data[S] ; 
+	public : 
+		constexpr const T* data () const {return m_data;}
+		constexpr T& operator[](size_t const index) {return m_data[index];}
+		constexpr const  T& operator[](size_t const index)const {return m_data[index];}
+};
 void T1(){
 	[[maybe_unused]] auto  y = add(3,4);
 	std::array<int, 10> ko{1, 23, 4, 5, 6, 7 , 8 , 3, 2}; 
