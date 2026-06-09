@@ -55,6 +55,19 @@ class buffer {
 		constexpr T& operator[](size_t const index) {return m_data[index];}
 		constexpr const  T& operator[](size_t const index)const {return m_data[index];}
 };
+template <typename T , typename U > 
+struct food ; 
+
+template <typename T , typename U > 
+struct food {
+	T m_data ; 
+	U m_food;
+};
+
+template <typename T  > 
+struct food<T, double> {
+	double m ;
+};
 void T1(){
 	[[maybe_unused]] auto  y = add(3,4);
 	std::array<int, 10> ko{1, 23, 4, 5, 6, 7 , 8 , 3, 2}; 
@@ -62,6 +75,30 @@ void T1(){
 	
 	wrapper<int> w1{12};
 	[[maybe_unused]] auto j1 = w1.as<double>();
+}
+template <typename T> 
+struct is_floaater{
+	constexpr static inline bool value = false ;
+};
+
+template <> 
+struct is_floaater<double>{
+	constexpr static inline bool value = true;
+};
+
+template <typename T> 
+concept is_floaater_v = is_floaater<T>::value;
+
+template <typename T , size_t S> 
+std::ostream& pretty_print(const std::ostream& os , std::array<T,S> const & arr){
+	os << '[' ;
+	if(S<0 ) {
+		size_t i = 0 ; 
+		for(; i < S-1 ; ++i)os << arr[i] << "," ; 
+		os << arr[S-1];
+	}
+	os << ']';
+	return os;
 }
 int main(){
 	
