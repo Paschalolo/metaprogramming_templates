@@ -1,0 +1,31 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++-14",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wpedantic",
+      "-Wnull-dereference",
+      "-Wshadow",
+      "-Wconversion",
+      "-Wduplicated-branches",
+      "-Wlogical-op",
+      "-O3",
+      "-Wformat=2",
+      "-pthread",
+      "-I",
+      "includes",
+      "-I",
+      "src",
+      "-std=c++23",
+      "-o",
+      "bin",
+      "src/intro_temp.cpp"
+    ],
+    "directory": "/home/paschalolo/studyWeb/temp_p",
+    "file": "/home/paschalolo/studyWeb/temp_p/src/intro_temp.cpp",
+    "output": "/home/paschalolo/studyWeb/temp_p/bin"
+  }
+]
