@@ -3,7 +3,7 @@
  *	Author : Paschal Ahanmisi 
  *	Topic : Varaidic templates 
  * */
-
+#include <functional>
 #include <iostream>
 #include <type_traits>
 #include <stdarg.h>
@@ -47,6 +47,20 @@ constexpr auto get_type_size(){
 template <typename... Ts , typename... Us> 
 constexpr auto multipacks(Ts... args1 , Us... args2){
 	std::cout << sizeof...(args1) << " " <<  sizeof...(args2);
+}
+
+template <typename , typename > 
+struct func_pair ; 
+
+template <typename R1 , typename... A1 , typename R2 , typename... A2> 
+struct func_pair<R1(A1...) , R2(A2...)>{
+	std::function<R1(A1...)>f{};
+	std::function<R1(A1...)>m{};
+};
+
+template <typename... T > 
+void captures(T... args){
+	auto l = [args...](){};
 }
 int main(){
 	[[maybe_unused]] int i =  sum(10, 20 ,30);
