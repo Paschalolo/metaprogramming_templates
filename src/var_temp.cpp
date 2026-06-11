@@ -62,6 +62,27 @@ template <typename... T >
 void captures(T... args){
 	auto l = [args...](){};
 }
+
+template <typename... T> 
+auto make_array(T... args){
+	return std::array<std::common_type_t<T...>, sizeof...(args)>{args...};
+}
+
+// Alignment specifier 
+template <typename... T> 
+struct alignment1{
+	alignas(T...) char a;
+};
+
+
+// tupele 
+template <typename T , typename ... Ts > 
+struct tuple {
+	tuple(const T& t , const Ts& ... ts): value{t}, rest{ts...}{}
+	private : 
+		T value ; 
+		tuple<Ts...> rest;
+};
 int main(){
 	[[maybe_unused]] int i =  sum(10, 20 ,30);
 	auto m = get_type_size<double , int , char ,  long double , unsigned long>();
