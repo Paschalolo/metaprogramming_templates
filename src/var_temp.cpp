@@ -3,6 +3,7 @@
  *	Author : Paschal Ahanmisi 
  *	Topic : Varaidic templates 
  * */
+#include <cstddef>
 #include <functional>
 #include <iostream>
 #include <type_traits>
@@ -83,10 +84,55 @@ struct tuple {
 		T value ; 
 		tuple<Ts...> rest;
 };
+template <typename... T> 
+struct tuple_c ;
+
+template <typename T> 
+struct tuple_c<T>{
+	tuple_c(T m):m_data(m){}
+	T m_data ; 
+	constexpr size_t size() const {return 1;}
+};
+template <size_t N>
+struct getter;
+template <typename T , typename... Args> 
+struct tuple_c<T , Args...>{
+
+
+		// template <size_t N, typename B , typename... Argg> 
+		// friend B& get_t(tuple_c<B, Argg...>& );
+		alignas(32)   T m_data ;
+		tuple_c<Args...> m_args;
+	public :
+		constexpr tuple_c(const T& tt , const Args&... args): m_data(tt),m_args(args...) {}
+		T& get_data(){
+			return m_data;
+		}
+		
+		constexpr size_t size() const {return 1 + sizeof...(Args);}
+		auto& get_next_tuple(){
+			return m_args;
+		}
+};
+
+template <>
+struct getter<0> {
+		template <typename Tuple>
+		constexpr static  auto& get_t(Tuple& tup){
+			return tup.m_data;
+		}
+};
+template <size_t N>
+struct getter {
+		template <typename Tuple>
+		constexpr static  auto& get_t(Tuple& tup){
+			constexpr size_t size = tup.size();
+			static_assert(N < size,"Data must be less than the value of struct " );
+			return getter<N-1>::get_t(tup.get_next_tuple());
+}
+};
 int main(){
-	[[maybe_unused]] int i =  sum(10, 20 ,30);
-	auto m = get_type_size<double , int , char ,  long double , unsigned long>();
-	for(auto const t : m){
-		std::cout << t<< " " ; 
-	}
+
+	tuple_c<int , int  , double , float> mm {8,9,10.34f, 12.3f};
+	std::cout << getter<2>::get_t(mm);
 }
