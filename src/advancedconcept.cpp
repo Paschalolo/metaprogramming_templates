@@ -65,6 +65,40 @@ struct printer {
 		std::cout <<w.val << " " ; 
 	}
 };
+
+template <typename T , typename... Args > 
+T sum12(T a , Args... args){
+	if constexpr (sizeof...(Args) == 0 ) {
+		return a ; 
+	}else return (a + ... + args);
+}
+
+template <typename T> 
+requires std::is_arithmetic_v<T>
+T add(const T a , T const b ){
+	return a+b;
+}
+
+template <typename T> 
+concept Container = requires(T t) {
+	typename T::value_type ; 
+	typename T::size_type ; 
+	typename T::allocator_type; 
+	typename T::iterator ; 
+	typename T::const_iterator ; 
+	t.size();
+	t.begin();
+	t.end();
+	t.cbegin();
+	t.cend();
+};
+
+template <typename T> 
+concept logger = requires(T t ){
+	t.error("just");
+	t.warning("a");
+	t.info("demo");
+};
 int main(){
 
 	return 0;
