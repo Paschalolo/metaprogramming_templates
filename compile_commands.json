@@ -22,10 +22,10 @@
       "-std=c++23",
       "-o",
       "bin",
-      "src/var_temp.cpp"
+      "src/advancedconcept.cpp"
     ],
     "directory": "/home/paschalolo/studyWeb/temp_p",
-    "file": "/home/paschalolo/studyWeb/temp_p/src/var_temp.cpp",
+    "file": "/home/paschalolo/studyWeb/temp_p/src/advancedconcept.cpp",
     "output": "/home/paschalolo/studyWeb/temp_p/bin"
   }
 ]
