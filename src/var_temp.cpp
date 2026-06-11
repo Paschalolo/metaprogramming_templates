@@ -131,8 +131,25 @@ struct getter {
 			return getter<N-1>::get_t(tup.get_next_tuple());
 }
 };
+
+template <size_t N , typename Tuple > 
+auto& get(Tuple& tt){
+	return getter<N>::get_t(tt);
+}
+
+// FOLD EXPRESSION 
+template <typename T , typename... Args> 
+T sum9(T t , Args... args){
+	return (t + ... + args);
+}
+
+template <typename... T> 
+void printf1(T... args){
+	((std::cout << args) , ... )<< "\n"; 
+}
 int main(){
 
 	tuple_c<int , int  , double , float> mm {8,9,10.34f, 12.3f};
-	std::cout << getter<2>::get_t(mm);
+	std::cout << get<0>(mm)<< get<1>(mm) << get<3>(mm);
+	printf1('d', 'o', 'g');
 }
