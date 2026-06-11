@@ -22,10 +22,10 @@
       "-std=c++23",
       "-o",
       "bin",
-      "src/intro_temp.cpp"
+      "src/var_temp.cpp"
     ],
     "directory": "/home/paschalolo/studyWeb/temp_p",
-    "file": "/home/paschalolo/studyWeb/temp_p/src/intro_temp.cpp",
+    "file": "/home/paschalolo/studyWeb/temp_p/src/var_temp.cpp",
     "output": "/home/paschalolo/studyWeb/temp_p/bin"
   }
 ]
