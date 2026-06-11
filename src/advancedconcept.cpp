@@ -22,6 +22,16 @@ struct parser {
 		std::cout << "parse";
 }
 };
+
+struct account_t{int number ;};
+
+
+template <typename T> 
+void process1(T) {std::cout << "T";}
+template <typename T> 
+void process1(const T) {std::cout << "T";}
+template <typename T> 
+void process1(volatile T) {std::cout << "T";}
 int main(){
 
 	return 0;
