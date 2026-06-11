@@ -1,4 +1,5 @@
 #include <type_traits>
+#include <memory>
 #include <concepts>
 #include <iostream>
 template <typename T>
@@ -25,13 +26,16 @@ struct parser {
 
 struct account_t{int number ;};
 
+struct foo{int data ; } ;
 
-template <typename T> 
-void process1(T) {std::cout << "T";}
-template <typename T> 
-void process1(const T) {std::cout << "T";}
-template <typename T> 
-void process1(volatile T) {std::cout << "T";}
+void f(foo& ) {std::cout << "foo&";}; 
+void f(foo&&){std::cout << "foo&&";}
+
+
+template <typename T , typename... Args > 
+auto make_unique(Args&&... args){
+	return std::unique_ptr<T>{new T (std::forward<Args>(args)...)};
+}
 int main(){
 
 	return 0;
