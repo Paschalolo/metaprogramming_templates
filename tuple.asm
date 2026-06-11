@@ -136,6 +136,8 @@ Disassembly of section .text:
     1194:	e9 77 ff ff ff       	jmp    1110 <register_tm_clones>
     1199:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
 
+; IN the mini function below we see that varadic arguments can have perfromance problems to the code 
+; all the values where poppped into the stack
 00000000000011a0 <_Z3miniz>:
     11a0:	f3 0f 1e fa          	endbr64
     11a4:	48 83 ec 58          	sub    rsp,0x58
