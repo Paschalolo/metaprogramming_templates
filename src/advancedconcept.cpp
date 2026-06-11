@@ -36,6 +36,35 @@ template <typename T , typename... Args >
 auto make_unique(Args&&... args){
 	return std::unique_ptr<T>{new T (std::forward<Args>(args)...)};
 }
+
+template <typename T , typename U> 
+auto minimum(T&& a , U&& b)-> decltype(a < b ? a : b){
+	return a < b ? a : b ;
+}
+
+struct wrapper{
+	wrapper(int i ) : val(i) {}
+	int val ; 
+	friend wrapper operator+(int const a , wrapper const & w){
+		return wrapper(a + w.val);
+	}
+	friend wrapper operator+(wrapper const & w , int const a ){
+		return wrapper(w.val + a );
+	}
+	friend void print3(wrapper const & w);
+	template <typename T> 
+	friend struct printer;
+};
+void print3(wrapper const& w){
+	std::cout << w.val << '\n'; 
+}
+
+template <typename T> 
+struct printer {
+	void operator()(wrapper const & w){
+		std::cout <<w.val << " " ; 
+	}
+};
 int main(){
 
 	return 0;
