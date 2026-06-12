@@ -99,6 +99,28 @@ concept logger = requires(T t ){
 	t.warning("a");
 	t.info("demo");
 };
+
+struct timerA {
+	void start(){}
+	long long stop(){return 0;}
+};
+struct timerB {
+	void start(){}
+	long long stop(){return 0;}
+};
+
+template <typename T , typename... Ts > 
+concept Ire_same_v = requires (Ts... ts) {
+	(... + ts) ; 
+	requires (std::is_same_v<T, Ts> && ...);
+	requires (sizeof...(Ts) > 1 );
+};
+
+template <typename T> 
+requires (sizeof(T) == 4)
+T addio(T a , T b){
+	return a +b;
+}
 int main(){
 
 	return 0;
