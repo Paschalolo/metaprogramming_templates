@@ -1,3 +1,4 @@
+#include <iterator>
 #include <type_traits>
 #include <memory>
 #include <concepts>
@@ -121,6 +122,32 @@ requires (sizeof(T) == 4)
 T addio(T a , T b){
 	return a +b;
 }
+
+template <typename T , typename  U > 
+T adzo(T a , U b ){
+	return a + b ; 
+}
+
+template <> 
+double adzo<double,  int> (double a , int b){
+	return a + static_cast<double>(b);
+	}
+
+/*
+ *	Random Access Iterator 
+ * */
+template <typename T > 
+concept random_access_it = 
+	std::bidirectional_iterator<T> && 
+	std::derived_from<T , std::random_access_iterator_tag> && 
+	std::totally_ordered<T> && 
+	std::sized_sentinel_for<T, T> && 
+	requires( T i , const T j , const std::iter_difference_t<T> n ){
+		{i += n } -> std::same_as<T&> ; 
+		{j + n } -> std::same_as<T>; 
+		{n +j } -> std::same_as<T> ; 
+		{i-= n } -> std::same_as<T&> ; 
+	};
 int main(){
 
 	return 0;
