@@ -146,7 +146,8 @@ concept random_access_it =
 		{i += n } -> std::same_as<T&> ; 
 		{j + n } -> std::same_as<T>; 
 		{n +j } -> std::same_as<T> ; 
-		{i-= n } -> std::same_as<T&> ; 
+		{i-= n } -> std::same_as<T&> ;
+		{j - n } -> std::same_as<T> ; 
 	};
 int main(){
 
