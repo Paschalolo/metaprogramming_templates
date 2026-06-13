@@ -22,10 +22,10 @@
       "-std=c++23",
       "-o",
       "bin",
-      "src/apllied_temp.cpp"
+      "src/advac.cpp"
     ],
     "directory": "/home/paschalolo/studyWeb/temp_p",
-    "file": "/home/paschalolo/studyWeb/temp_p/src/apllied_temp.cpp",
+    "file": "/home/paschalolo/studyWeb/temp_p/src/advac.cpp",
     "output": "/home/paschalolo/studyWeb/temp_p/bin"
   }
 ]
